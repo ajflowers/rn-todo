@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
   const [newTask, setNewTask] = useState('');
@@ -10,8 +10,8 @@ export default function App() {
   }
 
   const handleSubmit = () => {
-    setTasks([...tasks, {todo: newTask, id: Date.now()}]);
-    setNewTask('');
+    setTasks([...tasks, { task: newTask, key: Date.now() }]);
+    // setNewTask('');
   }
   
   return (
@@ -26,13 +26,15 @@ export default function App() {
         <Button title="ADD" onPress={handleSubmit}/>
         
       </View>
-      <ScrollView>
-        {tasks.map((task) => 
-          <View style={styles.task} key={task.id}>
-            <Text>{task.todo}</Text>
+      <FlatList 
+        keyExtractor={(item, index) => item.id}
+        data={tasks}
+        renderItem={itemData => (
+          <View style={styles.task}>
+            <Text>{itemData.item.task}</Text>
           </View>
         )}
-      </ScrollView>
+      />
     </View>
   );
 }
@@ -50,10 +52,11 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     width: '80%',
-    padding: 10
+    paddingHorizontal: 10
   },
   task: {
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
     marginTop: 10,
     backgroundColor: '#ccc',
     borderColor: 'black',
