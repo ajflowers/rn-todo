@@ -16,7 +16,10 @@ const InputForm = props => {
             onChangeText={handleInput}
             value={newTask}
             />
-            <Button title="ADD" onPress={() => props.handleSubmit(newTask)}/>
+            <Button title="ADD" onPress={() => {
+                props.handleSubmit(newTask);
+                setNewTask('');
+            }}/>
         
       </View>
 

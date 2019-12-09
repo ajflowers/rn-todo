@@ -9,8 +9,14 @@ export default function App() {
 
 
   const handleSubmit = newTask => {
-    setTasks([...tasks, { task: newTask, key: Date.now() }]);
-    // setNewTask('');
+    setTasks([...tasks, { task: newTask, id: Date.now().toString() }]);
+  }
+
+  const handleDelete = id => {
+    setTasks(currentTasks => {
+      return currentTasks.filter(task => task.id !== id);
+
+    });
   }
   
   return (
@@ -19,7 +25,7 @@ export default function App() {
       <FlatList 
         keyExtractor={(item, index) => item.id}
         data={tasks}
-        renderItem={itemData => <TodoItem task={itemData.item.task}/>}
+        renderItem={itemData => <TodoItem task={itemData.item.task} onDelete={() => handleDelete(itemData.item.id)} />}
       />
     </View>
   );
