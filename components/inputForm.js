@@ -19,12 +19,17 @@ const InputForm = props => {
             onChangeText={handleInput}
             value={newTask}
             />
-            <Button title="ADD" onPress={() => {
-                props.handleSubmit(newTask);
-                setNewTask('');
-            }}/>
-            <Button title="CANCEL" color="red" onPress={props.onCancel} />
-        
+            <View style={styles.buttonContainer}>
+              <View style={styles.button}>
+                <Button title="ADD" onPress={() => {
+                  props.handleSubmit(newTask);
+                  setNewTask('');
+              }}/>
+              </View>
+              <View style={styles.button}>
+                <Button title="CANCEL" color="red" onPress={props.onCancel} />
+              </View>
+            </View>
       </View>
       </Modal>
 
@@ -33,19 +38,28 @@ const InputForm = props => {
 }
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      inputTask: {
-        borderColor: 'black',
-        borderWidth: 1,
-        width: '80%',
-        paddingHorizontal: 10,
-        marginBottom: 10
+  inputContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inputTask: {
+    borderColor: 'black',
+    borderWidth: 1,
+    width: '80%',
+    paddingHorizontal: 10,
+    marginBottom: 10
 
-      }
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    width: '50%',
+    justifyContent: 'space-around'
+  },
+  button: {
+    width: '40%'
+  }
+
 });
 
 export default InputForm;
