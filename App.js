@@ -6,6 +6,7 @@ import InputForm from './components/inputForm';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
+  const [addMode, setAddMode] = useState(false);
 
 
   const handleSubmit = newTask => {
@@ -21,11 +22,12 @@ export default function App() {
   
   return (
     <View style={styles.screen}>
-      <InputForm handleSubmit={handleSubmit} />
+      <Button title="add new task" onPress={() => setAddMode(true)} />
+      <InputForm visible={addMode} handleSubmit={handleSubmit} />
       <FlatList 
         keyExtractor={(item, index) => item.id}
         data={tasks}
-        renderItem={itemData => <TodoItem task={itemData.item.task} onDelete={() => handleDelete(itemData.item.id)} />}
+        renderItem={itemData => <TodoItem task={itemData.item.task} onDelete={handleDelete} taskId={itemData.item.id}/>}
       />
     </View>
   );

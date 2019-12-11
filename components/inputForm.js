@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Modal } from 'react-native';
 
 const InputForm = props => {
     const [newTask, setNewTask] = useState('');
@@ -9,6 +9,7 @@ const InputForm = props => {
       }
     
     return(
+      <Modal visible={props.visible} animationType="slide">
         <View style={styles.inputContainer}>
             <TextInput 
             placeholder="Enter New Task" 
@@ -22,6 +23,7 @@ const InputForm = props => {
             }}/>
         
       </View>
+      </Modal>
 
     )
     
@@ -29,9 +31,9 @@ const InputForm = props => {
 
 const styles = StyleSheet.create({
     inputContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
       },
       inputTask: {
         borderColor: 'black',
