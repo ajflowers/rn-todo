@@ -7,6 +7,8 @@ const InputForm = props => {
     const handleInput = userText => {
         setNewTask(userText);
       }
+
+
     
     return(
       <Modal visible={props.visible} animationType="slide">
@@ -21,6 +23,7 @@ const InputForm = props => {
                 props.handleSubmit(newTask);
                 setNewTask('');
             }}/>
+            <Button title="CANCEL" color="red" onPress={props.onCancel} />
         
       </View>
       </Modal>
@@ -39,7 +42,9 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 1,
         width: '80%',
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        marginBottom: 10
+
       }
 });
 

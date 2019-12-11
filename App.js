@@ -11,6 +11,7 @@ export default function App() {
 
   const handleSubmit = newTask => {
     setTasks([...tasks, { task: newTask, id: Date.now().toString() }]);
+    setAddMode(false);
   }
 
   const handleDelete = id => {
@@ -19,15 +20,29 @@ export default function App() {
 
     });
   }
+
+  const handleCancel = () => {
+      setAddMode(false);
+  }
   
   return (
     <View style={styles.screen}>
       <Button title="add new task" onPress={() => setAddMode(true)} />
-      <InputForm visible={addMode} handleSubmit={handleSubmit} />
+      <InputForm 
+        visible={addMode} 
+        handleSubmit={handleSubmit}
+        onCancel={handleCancel}
+      />
       <FlatList 
         keyExtractor={(item, index) => item.id}
         data={tasks}
-        renderItem={itemData => <TodoItem task={itemData.item.task} onDelete={handleDelete} taskId={itemData.item.id}/>}
+        renderItem={itemData => 
+          <TodoItem 
+            task={itemData.item.task} 
+            onDelete={handleDelete} 
+            taskId={itemData.item.id} 
+          />
+        }
       />
     </View>
   );
